@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="shortcut icon" type="image/png" href="./images/favicon.png">
+  <title>Công Cụ Tạo Caption Ngẫu Nhiên</title>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <select class="form-select" id="topic" aria-label="Topic">
+          <option value="" selected>Chọn một chủ đề</option>
+          <option value="cats">Mèo</option>
+          <option value="dogs">Chó</option>
+          <option value="memes">Hài hước</option>
+        </select>
+      </div>
+
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary me-2" id="generate"><i
+            class="fa-solid fa-paper-plane me-2"></i>TẠO</button>
+        <button type="button" class="btn btn-success" id="copy"><i class="fa-solid fa-copy me-2"></i>SAO CHÉP</button>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col">
+        <div class="form-outline">
+          <textarea class="form-control" id="caption" rows="5" placeholder="Caption" readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+  <script>
+    let captionMap = new Map();
+    captionMap.set('cats', [
+      'Đáng yêu quá',
+      'Đáng yêu ghê',
+      'Đáng yêu xĩu',
+      'Đáng yêu quá đi',
+      'Đáng yêu quá trời',
+      'Cưng quá',
+      'Cưng ghê',
+      'Cưng xĩu',
+      'Cưng quá đi',
+      'Cưng quá trời',
+      'Xinh quá',
+      'Xinh ghê',
+      'Xinh xĩu',
+      'Xinh quá đi',
+      'Xinh quá trời',
+      'Dễ thương ghê',
+      'Dễ thương xĩu',
+      'Dễ thương quá đi',
+      'Dễ thương quá trời'
+    ]);
+    captionMap.set('dogs', [
+      'Đáng yêu quá',
+      'Đáng yêu ghê',
+      'Đáng yêu xĩu',
+      'Đáng yêu quá đi',
+      'Đáng yêu quá trời',
+      'Cưng quá',
+      'Cưng ghê',
+      'Cưng xĩu',
+      'Cưng quá đi',
+      'Cưng quá trời',
+      'Xinh quá',
+      'Xinh ghê',
+      'Xinh xĩu',
+      'Xinh quá đi',
+      'Xinh quá trời',
+      'Dễ thương ghê',
+      'Dễ thương xĩu',
+      'Dễ thương quá đi',
+      'Dễ thương quá trời'
+    ]);
+    captionMap.set('memes', [
+      'Ối dồi ôi',
+      'Không ngờ tới phải không',
+      'Ngu người',
+      'Nước đi này tại hạ chưa tính tới',
+      'Chịu luôn',
+      'Cạn lời',
+      'Quả là cao kiến',
+      'Không thể ngờ được'
+    ]);
+
+    let emojiMap = new Map();
+    emojiMap.set('cats', [
+      '🥰',
+      '😍',
+      '😘',
+      '😻'
+    ]);
+    emojiMap.set('dogs', [
+      '🥰',
+      '😍',
+      '😘',
+      '😻'
+    ]);
+    emojiMap.set('memes', [
+      '😂',
+      '🤣',
+      '🥲',
+      '😅',
+      '😳',
+      '😎',
+      '😆',
+      '😏'
+    ]);
+
+    let hashtagsMap = new Map();
+    hashtagsMap.set('cats', [
+      '#cat',
+      '#catlover',
+      '#kitty',
+      '#kitten',
+      '#meow',
+      '#catlife',
+      '#catlovers',
+      '#catoftheday',
+      '#kittens',
+      '#cutecat',
+      '#ilovemycat',
+      '#lovecats',
+      '#kittycat',
+      '#cutecats',
+      '#catloversclub',
+      '#caturday',
+      '#catphoto',
+      '#ilovecats',
+      '#bestmeow',
+      '#mycat',
+      '#catslover',
+      '#catsofworld',
+      '#tabbycat',
+      '#kittylove',
+      '#tabby',
+      '#catsoftheworld',
+      '#catscatscats',
+      '#kitties',
+      '#catsoftheday',
+      '#fluffycat',
+      '#whitecat',
+      '#kittenlove',
+      '#purr',
+      '#catworld',
+      '#siamesecat',
+      '#catslovers',
+      '#happycat',
+      '#purrfect',
+      '#catsrule',
+      '#catselfie',
+      '#meowdel',
+      '#catlifestyle',
+      '#greycat',
+      '#catoftheworld',
+      '#catpic',
+      '#catslove'
+    ]);
+    hashtagsMap.set('dogs', [
+      '#dog',
+      '#puppy',
+      '#pet',
+      '#doglover',
+      '#pets',
+      '#puppylove',
+      '#dogoftheday',
+      '#doglife',
+      '#doglovers',
+      '#puppies',
+      '#ilovemydog',
+      '#doggo',
+      '#rescuedog',
+      '#dogslife',
+      '#doglove',
+      '#doggy',
+      '#lovedogs',
+      '#pup',
+      '#cutedog',
+      '#dogphotography',
+      '#cutedogs',
+      '#happydog',
+      '#dogmom',
+      '#puppyoftheday',
+      '#dogmodel',
+      '#lovemydog',
+      '#dogsitting',
+      '#cutepuppy',
+      '#doggie',
+      '#puppydog',
+      '#ilovedogs',
+      '#dogscorner',
+      '#mydogiscutest',
+      '#pupper',
+      '#dailydog',
+      '#happydogs',
+      '#dogslover',
+      '#pups',
+      '#cutepuppies',
+      '#doggies',
+      '#dogstyle',
+      '#dogsandpals',
+      '#bestdog',
+      '#doggos',
+      '#puppylover',
+      '#dogsdaily',
+      '#ilovemydogs',
+      '#dogsrule',
+      '#doggylove',
+      '#dogsoftheday',
+      '#dogsonadventures',
+      '#dogfriends',
+      '#dogworld',
+      '#puppys',
+      '#dogsmile',
+      '#dogselfie',
+      '#puppylovers',
+      '#dogsworld',
+      '#doglifestyle',
+      '#dogfeatures',
+      '#dogsoftheworld',
+      '#dogloversclub',
+      '#dogdaily',
+      '#dogfamily',
+      '#dogpics',
+      '#dogvideo'
+    ]);
+    hashtagsMap.set('memes', [
+      '#fun',
+      '#memes',
+      '#meme',
+      '#lol',
+      '#comedy',
+      '#humor',
+      '#funnymemes',
+      '#dankmemes',
+      '#memesdaily',
+      '#funnyvideos',
+      '#lmao',
+      '#dank',
+      '#crazy',
+      '#laugh',
+      '#relatable',
+      '#haha',
+      '#edgymemes',
+      '#jokes',
+      '#offensivememes',
+      '#memepage',
+      '#dailymemes',
+      '#funnymeme',
+      '#epic',
+      '#cringe',
+      '#lmfao',
+      '#memer',
+      '#joke',
+      '#comedyvideos',
+      '#funnyvideo',
+      '#spicymemes',
+      '#laughing',
+      '#memeaccount',
+      '#relatablememes',
+      '#memelord',
+      '#dankmemesdaily',
+      '#hahaha',
+      '#memez',
+      '#bestmemes',
+      '#darkhumor',
+      '#darkmemes',
+      '#funnyposts',
+      '#laughs',
+      '#funnypictures',
+      '#bruh',
+      '#stupid',
+      '#memesquad',
+      '#funnyquotes',
+      '#spongebobmemes',
+      '#memesrlife',
+      '#edgymeme',
+      '#memedaily',
+      '#memegod',
+      '#comedyvideo',
+      '#memelife',
+      '#memeoftheday',
+      '#memesfordays',
+      '#joking',
+      '#rofl',
+      '#comedymemes',
+      '#funnymemesdaily',
+      '#hilariousmemes',
+      '#laughoutloud',
+      '#goodmemes',
+      '#funnypost',
+      '#memetime',
+      '#funnyclips',
+      '#funnypics',
+      '#memevideo',
+      '#dailymeme',
+      '#sofunny',
+      '#wtfmemes',
+      '#lolz',
+      '#memepages',
+      '#dumb',
+      '#memereview',
+      '#memed',
+      '#funnypic',
+      '#funnyvids',
+      '#funn',
+      '#pranks',
+      '#epicmemes',
+      '#funnystuff',
+      '#originalmemes',
+      '#funnyvines'
+    ]);
+
+    function getRandomTopicCaption(topic) {
+      const captions = captionMap.get(topic);
+
+      if (!captions || captions.length === 0) return "";
+
+      const randomIndex = Math.floor(Math.random() * captions.length);
+
+      return captions[randomIndex];
+    }
+
+
+    function getRandomTopicEmoji(topic) {
+      const emojis = emojiMap.get(topic);
+
+      if (!emojis || emojis.length === 0) return "";
+
+      const randomIndex = Math.floor(Math.random() * emojis.length);
+
+      return emojis[randomIndex];
+    }
+
+    function getRandomTopicHashtags(topic) {
+      const hashtags = hashtagsMap.get(topic).filter((word) => /^#[a-zA-Z0-9_]+$/.test(word));
+
+      if (hashtags.length <= 5) return [...new Set(hashtags)].join(" ");
+
+      const uniqueHashtags = [...new Set(hashtags)];
+      const randomHashtags = [];
+
+      while (randomHashtags.length < 5 && uniqueHashtags.length > 0) {
+        const randomIndex = Math.floor(Math.random() * uniqueHashtags.length);
+        randomHashtags.push(uniqueHashtags[randomIndex]);
+        uniqueHashtags.splice(randomIndex, 1);
+      }
+
+      return randomHashtags.join(" ");
+    };
+
+    const generate = document.getElementById("generate");
+    const copy = document.getElementById("copy");
+    const caption = document.getElementById("caption");
+
+    generate.addEventListener("click", function () {
+      const topic = document.getElementById("topic").value;
+
+      if (topic === "") {
+        caption.value = "";
+      } else {
+        caption.value = getRandomTopicCaption(topic) + " " + getRandomTopicEmoji(topic) + " " + getRandomTopicHashtags(topic) + " ";
+      }
+
+      generate.innerHTML = '<i class="fa-solid fa-paper-plane me-2"></i>ĐÃ TẠO';
+      setTimeout(() => {
+        generate.innerHTML = '<i class="fa-solid fa-paper-plane me-2"></i>TẠO';
+      }, 600);
+    });
+
+    copy.addEventListener("click", function () {
+      caption.select();
+      caption.setSelectionRange(0, 99999);
+
+      document.execCommand("copy");
+      navigator.clipboard.writeText(caption.value);
+
+      copy.innerHTML = '<i class="fa-solid fa-copy me-2"></i>ĐÃ SAO CHÉP';
+      setTimeout(() => {
+        copy.innerHTML = '<i class="fa-solid fa-copy me-2"></i>SAO CHÉP';
+      }, 600);
+    });
+  </script>
+</body>
+
+</html>
