@@ -104,8 +104,7 @@
     emojiMap.set('dogs', [
       '🥰',
       '😍',
-      '😘',
-      '😻'
+      '😘'
     ]);
     emojiMap.set('memes', [
       '😂',
@@ -346,12 +345,12 @@
     function getRandomTopicHashtags(topic) {
       const hashtags = hashtagsMap.get(topic).filter((word) => /^#[a-zA-Z0-9_]+$/.test(word));
 
-      if (hashtags.length <= 5) return [...new Set(hashtags)].join(" ");
+      if (hashtags.length <= 4) return [...new Set(hashtags)].join(" ");
 
       const uniqueHashtags = [...new Set(hashtags)];
       const randomHashtags = [];
 
-      while (randomHashtags.length < 5 && uniqueHashtags.length > 0) {
+      while (randomHashtags.length < 4 && uniqueHashtags.length > 0) {
         const randomIndex = Math.floor(Math.random() * uniqueHashtags.length);
         randomHashtags.push(uniqueHashtags[randomIndex]);
         uniqueHashtags.splice(randomIndex, 1);
