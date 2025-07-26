@@ -1,3 +1,3 @@
-#  Công Cụ Tạo Caption Ngẫu Nhiên
+#  Social Caption Generator
 
-Đường đẫn trang web tại [https://dinhpam102.github.io/social-caption-generator/](https://dinhpam102.github.io/social-caption-generator/)
+Source code of the website: [https://dinhpam102.github.io/social-caption-generator/](https://dinhpam102.github.io/social-caption-generator/)

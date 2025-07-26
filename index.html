@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="shortcut icon" type="image/png" href="./images/favicon.png">
-  <title>Công Cụ Tạo Caption Ngẫu Nhiên</title>
+  <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+  <title>Social Caption Generator</title>
 </head>
-
 <body>
   <div class="container mt-5">
     <div class="row g-3 align-items-center">
       <div class="col-auto">
         <select class="form-select" id="topic" aria-label="Topic">
-          <option value="" selected>Chọn một chủ đề</option>
-          <option value="cats">Mèo</option>
-          <option value="dogs">Chó</option>
-          <option value="memes">Hài hước</option>
+          <option value="" selected>Select a topic</option>
+          <option value="meocon">Mèo con</option>
+          <option value="chocon">Chó con</option>
+          <option value="haihuoc">Hài hước</option>
+          <option value="meovat">Mẹo vặt</option>
+          <option value="camdong">Cảm động</option>
         </select>
       </div>
 
       <div class="col-auto">
-        <button type="button" class="btn btn-primary me-2" id="generate"><i
-            class="fa-solid fa-paper-plane me-2"></i>TẠO</button>
-        <button type="button" class="btn btn-success" id="copy"><i class="fa-solid fa-copy me-2"></i>SAO CHÉP</button>
+        <button type="button" class="btn btn-primary me-2" id="generate"><i class="fa-solid fa-paper-plane me-2"></i><span>Generate</span></button>
+        <button type="button" class="btn btn-success" id="copy"><i class="fa-solid fa-copy me-2"></i><span>Copy</span></button>
       </div>
     </div>
 
@@ -41,7 +40,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
   <script>
     let captionMap = new Map();
-    captionMap.set('cats', [
+    captionMap.set('meocon', [
       'Đáng yêu quá',
       'Đáng yêu ghê',
       'Đáng yêu xĩu',
@@ -62,7 +61,7 @@
       'Dễ thương quá đi',
       'Dễ thương quá trời'
     ]);
-    captionMap.set('dogs', [
+    captionMap.set('chocon', [
       'Đáng yêu quá',
       'Đáng yêu ghê',
       'Đáng yêu xĩu',
@@ -83,7 +82,7 @@
       'Dễ thương quá đi',
       'Dễ thương quá trời'
     ]);
-    captionMap.set('memes', [
+    captionMap.set('haihuoc', [
       'Ối dồi ôi',
       'Không ngờ tới phải không',
       'Ngu người',
@@ -95,18 +94,18 @@
     ]);
 
     let emojiMap = new Map();
-    emojiMap.set('cats', [
+    emojiMap.set('meocon', [
       '🥰',
       '😍',
       '😘',
       '😻'
     ]);
-    emojiMap.set('dogs', [
+    emojiMap.set('chocon', [
       '🥰',
       '😍',
       '😘'
     ]);
-    emojiMap.set('memes', [
+    emojiMap.set('haihuoc', [
       '😂',
       '🤣',
       '🥲',
@@ -118,7 +117,7 @@
     ]);
 
     let hashtagsMap = new Map();
-    hashtagsMap.set('cats', [
+    hashtagsMap.set('meocon', [
       '#cat',
       '#catlover',
       '#kitty',
@@ -166,7 +165,7 @@
       '#catpic',
       '#catslove'
     ]);
-    hashtagsMap.set('dogs', [
+    hashtagsMap.set('chocon', [
       '#dog',
       '#puppy',
       '#pet',
@@ -234,7 +233,7 @@
       '#dogpics',
       '#dogvideo'
     ]);
-    hashtagsMap.set('memes', [
+    hashtagsMap.set('haihuoc', [
       '#fun',
       '#memes',
       '#meme',
@@ -372,9 +371,9 @@
         caption.value = getRandomTopicCaption(topic) + " " + getRandomTopicEmoji(topic) + " " + getRandomTopicHashtags(topic) + " ";
       }
 
-      generate.innerHTML = '<i class="fa-solid fa-paper-plane me-2"></i>ĐÃ TẠO';
+      generate.innerHTML = '<i class="fa-solid fa-paper-plane me-2"></i><span>Generated</span>';
       setTimeout(() => {
-        generate.innerHTML = '<i class="fa-solid fa-paper-plane me-2"></i>TẠO';
+        generate.innerHTML = '<i class="fa-solid fa-paper-plane me-2"></i><span>Generate</span>';
       }, 600);
     });
 
@@ -385,12 +384,11 @@
       document.execCommand("copy");
       navigator.clipboard.writeText(caption.value);
 
-      copy.innerHTML = '<i class="fa-solid fa-copy me-2"></i>ĐÃ SAO CHÉP';
+      copy.innerHTML = '<i class="fa-solid fa-copy me-2"></i><span>Copied</span>';
       setTimeout(() => {
-        copy.innerHTML = '<i class="fa-solid fa-copy me-2"></i>SAO CHÉP';
+        copy.innerHTML = '<i class="fa-solid fa-copy me-2"></i><span>Copy</span>';
       }, 600);
     });
   </script>
 </body>
-
 </html>
