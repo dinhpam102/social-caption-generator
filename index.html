@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="shortcut icon" type="image/png" href="./img/favicon.svg">
+  <title>Social Caption Generator</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <select class="form-select" id="topic" aria-label="Topic">
+          <option value="kitten">Kitten</option>
+          <option value="puppy">Puppy</option>
+          <option value="funny">Funny</option>
+        </select>
+      </div>
+
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary me-2" id="generate"><i class="fa-solid fa-paper-plane me-2"></i><span>Generate</span></button>
+        <button type="button" class="btn btn-success" id="copy"><i class="fa-solid fa-copy me-2"></i><span>Copy</span></button>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col">
+        <div class="form-outline">
+          <textarea class="form-control" id="caption" rows="5" placeholder="Caption" readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
